@@ -1,7 +1,10 @@
 from tkinter import Spinbox
+from tkinter.constants import X
 from guizero import *
 from classes_mood import *
 import random
+import os.path
+
 
 databs_obj = db_maker()
 databs_obj.mood_db_setUp()
@@ -85,12 +88,21 @@ def submitter():
     # IN A GUIZERO APP TO VIEW READ AND USE.
     # I ATTEMPTED RECURSION TO CREATE THE MUTABLE FILE NAMES BUT I FEEL I DID IT WRONG 
     # AND A SIMPLE FOR LOOP ALSO DID NOT WORK
-    
-    items_to_display = "Your ID is:\t\n" + "\n" + str(id_val) + "\n" + "Today you feel\t\n" + "\n" + str(feel_val) + "\n" + "Tomorrow seems hopefully\t\n" + "\n" + str(tomrrw_val) + "\n" + "my grooming was:\t\n " + "\n" +str(hygiene_val) + "\n" + "my Spiritual life was:\t \n" + "\n" + str(health_eating) + "\n" + "i went to work\t\n" + "\n" + str(work_box_val) + "\n" + "Exercise:\t\n " + "\n" + str(exercise_val) +"\n" + "Addiction:\t\n" + "\n" + str(addiction_val) + "\n"  
-    file_1 = open("hello.txt", "a+")
-    full_note = items_to_display + notes_txtBox.value
-    file_1.write(full_note)
-    file_1.close
+
+    '''for x in range(0, 999):    
+        x = 1
+        file_1 = open(f"hello{x}.txt", "a+")
+        items_to_display = "Your ID is:\t\n" + "\n" + str(id_val) + "\n" + "Today you feel\t\n" + "\n" + str(feel_val) + "\n" + "Tomorrow seems hopefully\t\n" + "\n" + str(tomrrw_val) + "\n" + "my grooming was:\t\n " + "\n" +str(hygiene_val) + "\n" + "my Spiritual life was:\t \n" + "\n" + str(health_eating) + "\n" + "i went to work\t\n" + "\n" + str(work_box_val) + "\n" + "Exercise:\t\n " + "\n" + str(exercise_val) +"\n" + "Addiction:\t\n" + "\n" + str(addiction_val) + "\n"
+        full_note = items_to_display + notes_txtBox.value
+        file_1.write(full_note)
+        file_1.close
+        
+        if os.path.isfile(f"hello{x}.txt") == False:
+            items_to_display = "Your ID is:\t\n" + "\n" + str(id_val) + "\n" + "Today you feel\t\n" + "\n" + str(feel_val) + "\n" + "Tomorrow seems hopefully\t\n" + "\n" + str(tomrrw_val) + "\n" + "my grooming was:\t\n " + "\n" +str(hygiene_val) + "\n" + "my Spiritual life was:\t \n" + "\n" + str(health_eating) + "\n" + "i went to work\t\n" + "\n" + str(work_box_val) + "\n" + "Exercise:\t\n " + "\n" + str(exercise_val) +"\n" + "Addiction:\t\n" + "\n" + str(addiction_val) + "\n"  
+            x += 1
+            full_note = items_to_display + notes_txtBox.value
+            file_1.write(full_note)
+            file_1.close'''
 
     #MESSAGEBOX WIDGET TODAY
     mssg_percent = total_val/50
