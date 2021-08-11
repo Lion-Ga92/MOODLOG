@@ -92,6 +92,15 @@ def submitter():
     file_1.write(full_note)
     file_1.close
 
+    #MESSAGEBOX WIDGET TODAY
+    mssg_percent = total_val/50
+
+    if mssg_percent < .50:
+        app.info("info", f"Your value for the day is {total_val} out of 45")
+
+    elif mssg_percent >= .50:
+        app.info("infoBad", f"Your value for the day is {total_val} out of 45. Please reach out to your support network")
+
 submit_button = PushButton(box_3, text="Submit" ,command=submitter, width=20, height=1, grid=[1, 2] )
 
 app.display()
