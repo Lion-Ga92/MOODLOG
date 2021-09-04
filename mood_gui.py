@@ -1,9 +1,11 @@
+from genericpath import isfile
+from sys import path
 from tkinter import Spinbox
 from tkinter.constants import X
 from guizero import *
 from classes_mood import *
 import random
-import os.path
+import datetime
 
 
 databs_obj = db_maker()
@@ -50,7 +52,9 @@ notes_txtBox = TextBox(box_3, width=50, height=5, grid=[1, 1], multiline=True, s
 # and adds them in their right spot in the db. 
 #\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/
 
-def submitter():
+def submitter(x=1):
+    date_now = datetime.date.today()
+    date_now = str(date_now)
     feel_val = feel_Slide.value
     tomrrw_val = tmorrow_Slide.value
     hygiene_val = hygn_rate_slide.value
@@ -59,6 +63,7 @@ def submitter():
     work_box_val = work_checkbox.value
     exercise_val = exercise_chckBox.value
     addiction_val = addict_checkbox.value 
+    notes_Val = notes_txtBox.value
 
     if work_checkbox.value == 0:
         work_box_val = 1
@@ -81,7 +86,7 @@ def submitter():
     
     id_val = random.randint(1, 9999999)
 
-    databs_obj.db_adder(id_val, feel_val, tomrrw_val, hygiene_val, spiritual_val, health_eating, work_box_val, exercise_val, addiction_val, total_val)
+    databs_obj.db_adder(id_val, feel_val, tomrrw_val, hygiene_val, spiritual_val, health_eating, work_box_val, exercise_val, addiction_val, total_val, notes_Val)
  
     # FROM THIS POINT I AM WORKING ON A FILE SYSTEM THAT TAKES A VARIABLE NAME AND STORES IT 
     # MY HOPE IS TO EVENTUALLY CREATE A SUBDIRECTORY AND TAKE THOSE SAVED FILES AND SERVE THEM BACK
@@ -89,20 +94,6 @@ def submitter():
     # I ATTEMPTED RECURSION TO CREATE THE MUTABLE FILE NAMES BUT I FEEL I DID IT WRONG 
     # AND A SIMPLE FOR LOOP ALSO DID NOT WORK
 
-    '''for x in range(0, 999):    
-        x = 1
-        file_1 = open(f"hello{x}.txt", "a+")
-        items_to_display = "Your ID is:\t\n" + "\n" + str(id_val) + "\n" + "Today you feel\t\n" + "\n" + str(feel_val) + "\n" + "Tomorrow seems hopefully\t\n" + "\n" + str(tomrrw_val) + "\n" + "my grooming was:\t\n " + "\n" +str(hygiene_val) + "\n" + "my Spiritual life was:\t \n" + "\n" + str(health_eating) + "\n" + "i went to work\t\n" + "\n" + str(work_box_val) + "\n" + "Exercise:\t\n " + "\n" + str(exercise_val) +"\n" + "Addiction:\t\n" + "\n" + str(addiction_val) + "\n"
-        full_note = items_to_display + notes_txtBox.value
-        file_1.write(full_note)
-        file_1.close
-        
-        if os.path.isfile(f"hello{x}.txt") == False:
-            items_to_display = "Your ID is:\t\n" + "\n" + str(id_val) + "\n" + "Today you feel\t\n" + "\n" + str(feel_val) + "\n" + "Tomorrow seems hopefully\t\n" + "\n" + str(tomrrw_val) + "\n" + "my grooming was:\t\n " + "\n" +str(hygiene_val) + "\n" + "my Spiritual life was:\t \n" + "\n" + str(health_eating) + "\n" + "i went to work\t\n" + "\n" + str(work_box_val) + "\n" + "Exercise:\t\n " + "\n" + str(exercise_val) +"\n" + "Addiction:\t\n" + "\n" + str(addiction_val) + "\n"  
-            x += 1
-            full_note = items_to_display + notes_txtBox.value
-            file_1.write(full_note)
-            file_1.close'''
 
     #MESSAGEBOX WIDGET TODAY
     mssg_percent = total_val/50
@@ -112,6 +103,7 @@ def submitter():
 
     elif mssg_percent >= .50:
         app.info("infoBad", f"Your value for the day is {total_val} out of 45. Please reach out to your support network")
+
 
 submit_button = PushButton(box_3, text="Submit" ,command=submitter, width=20, height=1, grid=[1, 2] )
 

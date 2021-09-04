@@ -1,4 +1,5 @@
 import sqlite3
+from guizero import *
 # DB_MAKER IS MOSTLY DONE, IF I COULD ONLY GET IT TO GIVE ME THE SERIAL NUMBER THE 
 # THE WAY I WANT IT THAT WOULD BE GREAT
 
@@ -12,7 +13,7 @@ class db_maker:
 
         self.cur = self.conn.cursor()
 
-        self.cur.execute("""CREATE TABLE IF NOT EXISTS moodToday ('id' INTEGER, 'moodToday' INTEGER, 'moodTomorrow' INTEGER, 'hygiene' INTEGER, 'spirituality' INTEGER, 'healthEating' INTEGER, 'noGoToWork' INTEGER, 'noworkOut' INTEGER, 'addiction' INTEGER, 'total' INTEGER); """)
+        self.cur.execute("""CREATE TABLE IF NOT EXISTS moodToday ('id' INTEGER, 'moodToday' INTEGER, 'moodTomorrow' INTEGER, 'hygiene' INTEGER, 'spirituality' INTEGER, 'healthEating' INTEGER, 'noGoToWork' INTEGER, 'noworkOut' INTEGER, 'addiction' INTEGER, 'total' INTEGER, 'notes' TEXT); """)
 
         self.conn.commit()
 
@@ -20,7 +21,7 @@ class db_maker:
         while f != 1:
             self.conn.close() # I STILL NEED TO FIGURE OUT HOW TO OPEN AND CLOSE THE DB 
 
-    def db_adder(self, a, b, c, d, e, g, h, i, j, k):
+    def db_adder(self, a, b, c, d, e, g, h, i, j, k, m):
         f = 0
         self.a = a
         self.b = b 
@@ -32,11 +33,12 @@ class db_maker:
         self.i = i
         self.j = j 
         self.k = k
+        self.m = m
 
-        list_o__vals = [self.a, self.b, self.c, self.d, self.e, self.g, self.h, self.i, self.j, self.k]
+        list_o__vals = [self.a, self.b, self.c, self.d, self.e, self.g, self.h, self.i, self.j, self.k, self.m]
 
         self.cur = self.conn.cursor()
-        self.cur.execute("""INSERT INTO moodToday VALUES (?,?,?,?,?,?,?,?,?,?); """, list_o__vals)
+        self.cur.execute("""INSERT INTO moodToday VALUES (?,?,?,?,?,?,?,?,?,?,?); """, list_o__vals)
 
         self.conn.commit()
         f = 1
@@ -58,3 +60,15 @@ class db_maker:
 
 """IN ANOTHER CLASS PERHAPS, ENVISION IN MY APP A SMALL NOTEPAD TO BE ABLE 
     TO WRITE SOME SENTIMENTS DOWN. MAYBE AN OVERLAYER APP THAT SERVES AS THE GUI LOGIN"""
+
+class second_App:
+
+    def __init__(self):
+        self = self
+
+    def second_Wind_app(self):
+        self.second = App(title="Database Entry Display", width=780, height=1000, layout="grid")
+    
+        
+        
+        self.second.display()
